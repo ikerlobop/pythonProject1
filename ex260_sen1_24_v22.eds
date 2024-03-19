@@ -1,0 +1,247 @@
+$ EZ-EDS Version 3.9 Generated Electronic Data Sheet
+
+[File]
+        DescText = "SMC EX260-SEN1";
+        CreateDate = 09-27-2012;
+        CreateTime = 10:19:10;
+        ModDate = 08-01-2016;
+        ModTime = 10:09:06;
+        Revision = 2.2;
+        HomeURL = "http://www.smcworld.com";
+
+[Device]
+        VendCode = 7;
+        VendName = "SMC Corporation";
+        ProdType = 27;
+        ProdTypeStr = "Pneumatic Valve(s)";
+        ProdCode = 156;
+        MajRev = 2;
+        MinRev = 2;
+        ProdName = "EX260-SEN1";
+        Catalog = "EX260-SEN1";
+        Icon = "ex260-sen1.ico";
+
+[Device Classification]
+        Class1 = EtherNetIP;
+
+[Params]
+        Param1 =
+                0,                      $ reserved, shall equal 0
+                ,,                      $ Link Path Size, Link Path
+                0x0000,                 $ Descriptor
+                0xC8,                   $ Data Type
+                4,                      $ Data Size in bytes
+                "RPI",                  $ name
+                "",                     $ units
+                "",                     $ help string
+                4000,5000000,10000,     $ min, max, default data values
+                ,,,,                    $ mult, div, base, offset scaling
+                ,,,,                    $ mult, div, base, offset links
+                ;                       $ decimal places
+        Param2 =
+                0,                      $ reserved, shall equal 0
+                6,"20 64 24 01 30 64",  $ Link Path Size, Link Path
+                0x0010,                 $ Descriptor
+                0xC1,                   $ Data Type
+                1,                      $ Data Size in bytes
+                "SOLV Status",          $ name
+                "",                     $ units
+                "",                     $ help string
+                0,1,0,                  $ min, max, default data values
+                ,,,,                    $ mult, div, base, offset scaling
+                ,,,,                    $ mult, div, base, offset links
+                ;                       $ decimal places
+        Enum2 =
+                0,"OK",
+                1,"Fault";
+        Param3 =
+                0,                      $ reserved, shall equal 0
+                ,,                      $ Link Path Size, Link Path
+                0x0200,                 $ Descriptor
+                0xC2,                   $ Data Type
+                1,                      $ Data Size in bytes
+                "Output size",          $ name
+                "",                     $ units
+                "",                     $ help string
+                0,32,0,                 $ min, max, default data values
+                ,,,,                    $ mult, div, base, offset scaling
+                ,,,,                    $ mult, div, base, offset links
+                ;                       $ decimal places
+        Param4 =
+                0,                      $ reserved, shall equal 0
+                ,,                      $ Link Path Size, Link Path
+                0x0200,                 $ Descriptor
+                0xC2,                   $ Data Type
+                1,                      $ Data Size in bytes
+                "Input size",           $ name
+                "",                     $ units
+                "",                     $ help string
+                0,16,0,                 $ min, max, default data values
+                ,,,,                    $ mult, div, base, offset scaling
+                ,,,,                    $ mult, div, base, offset links
+                ;                       $ decimal places
+
+[Groups]
+        Group1 =
+                "Basic Configuration",
+                1,
+                1;
+        Group2 =
+                "Status",
+                3,
+                2,3,4;
+
+[Assembly]
+        Revision = 2;
+        Assem100 =
+                "Input Data",
+                "20 04 24 64 30 03",
+                ,
+                0x0000,
+                ,,
+                16,Param4;
+        Assem105 =
+                "Configuration Data",
+                "20 04 24 69 30 03",
+                ,
+                0x0000,
+                ,,
+                0,;
+        Assem150 =
+                "Output Data",
+                "20 04 24 96 30 03",
+                ,
+                0x0000,
+                ,,
+                32,Param3;
+        Assem151 =
+                "Listen Only Cousumed Data",
+                "20 04 24 97 30 03",
+                ,
+                0x0000,
+                ,,
+                0,;
+
+[Connection Manager]
+        Connection1 =
+                0x04010002,             $ 0-15    = supported transport classes
+                                        $ 16      = trigger: cyclic
+                                        $ 17      = trigger: change of state
+                                        $ 18      = trigger: application
+                                        $ 19-23   = trigger: reserved
+                                        $ 24      = transport type: listen-only
+                                        $ 25      = transport type: input-only
+                                        $ 26      = transport type: exclusive-owner
+                                        $ 27      = transport type: redundant-owner
+                                        $ 28-30   = reserved
+                                        $ 31      = Client = 0 / Server = 1
+                0x4464040F,             $ 0       = O->T fixed size supported
+                                        $ 1       = O->T variable size supported
+                                        $ 2       = T->O fixed size supported
+                                        $ 3       = T->O variable size supported
+                                        $ 4-5     = O->T number of bytes per slot (obsolete)
+                                        $ 6-7     = T->O number of bytes per slot (obsolete)
+                                        $ 8-10    = O->T Real time transfer format
+                                        $ 11      = reserved
+                                        $ 12-14   = T->O Real time transfer format
+                                        $ 15      = reserved
+                                        $ 16      = O->T connection type: NULL
+                                        $ 17      = O->T connection type: MULTICAST
+                                        $ 18      = O->T connection type: POINT2POINT
+                                        $ 19      = O->T connection type: reserved
+                                        $ 20      = T->O connection type: NULL
+                                        $ 21      = T->O connection type: MULTICAST
+                                        $ 22      = T->O connection type: POINT2POINT
+                                        $ 23      = T->O connection type: reserved
+                                        $ 24      = O->T priority: LOW
+                                        $ 25      = O->T priority: HIGH
+                                        $ 26      = O->T priority: SCHEDULED
+                                        $ 27      = O->T priority: reserved
+                                        $ 28      = T->O priority: LOW
+                                        $ 29      = T->O priority: HIGH
+                                        $ 30      = T->O priority: SCHEDULED
+                                        $ 31      = T->O priority: reserved
+                Param1,4,Assem150,      $ O->T RPI, size, format
+                Param1,2,Assem100,      $ T->O RPI, size, format
+                ,,                      $ config #1 size, format
+                ,Assem105,              $ config #2 size, format
+                "Exclusive Owner",      $ Connection Name
+                "",                     $ help string
+                "20 04 24 69 2C 96 2C 64";    $ Path
+        Connection2 =
+                0x01010002,             $ 0-15    = supported transport classes
+                                        $ 16      = trigger: cyclic
+                                        $ 17      = trigger: change of state
+                                        $ 18      = trigger: application
+                                        $ 19-23   = trigger: reserved
+                                        $ 24      = transport type: listen-only
+                                        $ 25      = transport type: input-only
+                                        $ 26      = transport type: exclusive-owner
+                                        $ 27      = transport type: redundant-owner
+                                        $ 28-30   = reserved
+                                        $ 31      = Client = 0 / Server = 1
+                0x4464030F,             $ 0       = O->T fixed size supported
+                                        $ 1       = O->T variable size supported
+                                        $ 2       = T->O fixed size supported
+                                        $ 3       = T->O variable size supported
+                                        $ 4-5     = O->T number of bytes per slot (obsolete)
+                                        $ 6-7     = T->O number of bytes per slot (obsolete)
+                                        $ 8-10    = O->T Real time transfer format
+                                        $ 11      = reserved
+                                        $ 12-14   = T->O Real time transfer format
+                                        $ 15      = reserved
+                                        $ 16      = O->T connection type: NULL
+                                        $ 17      = O->T connection type: MULTICAST
+                                        $ 18      = O->T connection type: POINT2POINT
+                                        $ 19      = O->T connection type: reserved
+                                        $ 20      = T->O connection type: NULL
+                                        $ 21      = T->O connection type: MULTICAST
+                                        $ 22      = T->O connection type: POINT2POINT
+                                        $ 23      = T->O connection type: reserved
+                                        $ 24      = O->T priority: LOW
+                                        $ 25      = O->T priority: HIGH
+                                        $ 26      = O->T priority: SCHEDULED
+                                        $ 27      = O->T priority: reserved
+                                        $ 28      = T->O priority: LOW
+                                        $ 29      = T->O priority: HIGH
+                                        $ 30      = T->O priority: SCHEDULED
+                                        $ 31      = T->O priority: reserved
+                Param1,0,Assem151,      $ O->T RPI, size, format
+                Param1,2,Assem100,      $ T->O RPI, size, format
+                ,,                      $ config #1 size, format
+                ,,                      $ config #2 size, format
+                "Listen Only",          $ Connection Name
+                "",                     $ help string
+                "20 04 24 69 2C 97 2C 64";    $ Path
+
+[Capacity]
+        MaxCIPConnections = 8;
+        TSpec1 = TxRx, 2, 1000;
+        TSpec2 = TxRx, 64, 1000;
+
+[DLR Class]
+        Revision = 3;
+        MaxInst = 1;
+        Number_Of_Static_Instances = 1;
+        Max_Number_Of_Dynamic_Instances = 0;
+        Ring_Supervisor_Capable = No;
+
+[TCP/IP Interface Class]
+        Revision = 4;
+        MaxInst = 1;
+        Number_Of_Static_Instances = 1;
+        Max_Number_Of_Dynamic_Instances = 0;
+        ENetQCT1 =
+                500,                    $ Ready for Connection Time
+                50;                     $ Accumulated CIP Connection Time
+
+[Ethernet Link Class]
+        Revision = 3;
+        MaxInst = 2;
+        Number_Of_Static_Instances = 2;
+        Max_Number_Of_Dynamic_Instances = 0;
+        InterfaceLabel1 = "ETH-PHY1";
+        InterfaceLabel2 = "ETH-PHY2";
+        InterfaceType1 = 2;
+        InterfaceType2 = 2;
+
